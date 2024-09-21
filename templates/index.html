@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Center Cooling Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Predict Total Water Required for Data Center Cooling</h2>
+        <form method="post" action="/predict">
+            <div class="mb-3">
+                <label for="number_of_servers" class="form-label">Number of Servers</label>
+                <input type="number" class="form-control" id="number_of_servers" name="number_of_servers" required>
+            </div>
+            <div class="mb-3">
+                <label for="season" class="form-label">Season</label>
+                <select class="form-control" id="season" name="season" required>
+                    <option value="0">Summer</option>
+                    <option value="1">Winter</option>
+                    <option value="2">Spring</option>
+                    <option value="3">Fall</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="server_time" class="form-label">Server Time (hours)</label>
+                <input type="number" class="form-control" id="server_time" name="server_time" required>
+            </div>
+            <div class="mb-3">
+                <label for="surrounding_temp" class="form-label">Surrounding Temperature (°C)</label>
+                <input type="number" class="form-control" id="surrounding_temp" name="surrounding_temp" step="0.1" required>
+            </div>
+            <div class="mb-3">
+                <label for="current_temp" class="form-label">Current Temperature (°C)</label>
+                <input type="number" class="form-control" id="current_temp" name="current_temp" step="0.1" required>
+            </div>
+            <div class="mb-3">
+                <label for="maintainable_temp" class="form-label">Maintainable Temperature (°C)</label>
+                <input type="number" class="form-control" id="maintainable_temp" name="maintainable_temp" step="0.1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        {% if prediction_text %}
+        <div class="alert alert-info mt-3" role="alert">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
